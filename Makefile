@@ -1,22 +1,24 @@
-IDIR =../include
-CC=gcc
-CFLAGS=-I$(IDIR)
+EXEC 	= main
+CC		= gcc
+CCFLAGS = -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic
+PERF_FILE = perf.data*
+SOURCES 	= $(wildcard *.cpp)
+SOURCES     := $(filter-out $(TESTSOURCES), $(SOURCES))
+OBJECTS		= $(SOURCES:%.cpp=%.o)
 
-ODIR=obj
-LDIR =../lib
+all: $(EXECUTABLE)
 
-LIBS=-lm
+rhyme: rhyme.o 
+	$(CC) $(CFLAGS) -o rhyme rhyme.o
 
-_DEPS = rhyme.h
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+rhyme.o: rhyme.cpp rhyme.h
+	$(CC) $(CFLAGS) -c rhyme.cpp
 
-$(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-rhyme: 
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
-
-.PHONY: clean
-
+test_rhyme.o: test_rhyme.cpp rhyme.h
+	$(CC) $(CFLAGS) -c test_rhyme.cpp
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+	rm -f $(OBJECTS) $(EXECUTABLE) $(PERF_FILE)
+	rm -Rf *.dSYM
+
+.PHONY: all release debug profile clean
+.SUFFIXES:
