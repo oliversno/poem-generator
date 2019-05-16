@@ -1,8 +1,8 @@
 #ifndef RHYME_H
 #define RHYME_H
 
-#include<string>
-#include<algorithm>
+#include <string>
+#include <algorithm>
 
 // Metaphone codes are 0,B,F,H,J,K,L,M,N,P,R,S,T,W,X,Y where 0 is 'th' X is 'sh'/'ch'
 
@@ -12,7 +12,11 @@ private:
     std::string word;
     int pos;
 
-    bool equalExcludingCPred(char a, char b);
+    static bool equalExcludingCPred(char a, char b){
+        if(a == 'C')
+                return false;
+            return (a == b);
+    }
 
     char peek();
 

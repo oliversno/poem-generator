@@ -1,11 +1,5 @@
 #include "rhyme.h"
-#include<string>
-
-bool Metaphone::equalExcludingCPred(char a, char b){
-  if(a == 'C')
-        return false;
-    return (a == b);
-}
+#include <string>
 
 char Metaphone::peek() {
     return peek(0);
@@ -36,7 +30,7 @@ bool Metaphone::isVowel(char test){
 
 std::string Metaphone::encode(){
     if(word.empty())
-            return;
+            return "\0";
         
         std::string encoded;
         encoded.reserve(word.length());
@@ -69,8 +63,8 @@ std::string Metaphone::encode(){
         while(peek() != '\0'){
             char current = peek(); // for cache optimization
 
-            if(EqualToAny(current, "FJLMNR") || encoded.empty() && isVowel(c)){
-                encoded.push_back(c); // F,J,L,M,N,R and beining vowels always make their own sounds
+            if(EqualToAny(current, "FJLMNR") || encoded.empty() && isVowel(current)){
+                encoded.push_back(current); // F,J,L,M,N,R and beining vowels always make their own sounds
                 moveAhead();
             }
             else{
@@ -177,7 +171,7 @@ std::string Metaphone::encode(){
                     case 'W':
                     case 'Y':
                         if (isVowel(peek(1)))
-                            encoded.push_back(c); // W and Y make their own sound unless followed by a vowel
+                            encoded.push_back(current); // W and Y make their own sound unless followed by a vowel
                         break;
                      case 'X':
                         encoded.push_back('K');
