@@ -7,7 +7,7 @@
 // Metaphone codes are 0,B,F,H,J,K,L,M,N,P,R,S,T,W,X,Y where 0 is 'th' X is 'sh'/'ch'
 
 class Metaphone {
-private:
+public:
 
     std::string word;
     int pos;
