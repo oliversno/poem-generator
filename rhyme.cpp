@@ -20,7 +20,7 @@ void Metaphone::moveAhead(int offset){
     pos = std::min(pos + offset, (int)word.length());
 }
 
-bool MetaphoneEqualToAny(char test, std::string chars){
+bool Metaphone::EqualToAny(char test, std::string chars){
     return chars.find(test) != std::string::npos;
 }
 

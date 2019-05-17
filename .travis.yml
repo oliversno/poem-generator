@@ -14,10 +14,20 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
+env:
+  global:
+    - CFLAGS="-Wall -Wextra -pedantic -Wconversion "
+    - CXXFLAGS="-Wall -Wextra -pedantic -Wconversion"
 before_install:
     - eval "${MATRIX_EVAL}"
+    - which $CC
+    - which $CXX
+    - $CC --version
+    - $CXX --version
 
 script:
-  #make all
-  make rhyme
-  make test_rhyme.o
+  - mkdir build
+  - cd build
+  - cmake .. -DBUILD_TESTS=ON
+  - make
+  - make test
