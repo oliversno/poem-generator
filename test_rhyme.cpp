@@ -14,7 +14,7 @@ TEST(ApplyTest, Basic2){
 
 TEST(ApplyTest, Basic3){
     Metaphone m{"abcccde"};
-    EXPECT_EQ(m.word, "ABCCDE");
+    EXPECT_EQ(m.word, "ABCCCDE");
 }
 
 TEST(ApplyTest, Peek1){
@@ -74,20 +74,20 @@ TEST(ApplyTest, MoveAhead5){
 
 TEST(ApplyTest, EqualToAny1){
     Metaphone m{"abcde"};
-    EXPECT_TRUE(m.EqualToAny('y', "wxyz"));
+    EXPECT_TRUE(m.EqualToAny('Y', "WXYZ"));
 }
 
 TEST(ApplyTest, EqualToAny2){
     Metaphone m{"abcde"};
-    EXPECT_FALSE(m.EqualToAny('q', "wxyz"));
+    EXPECT_FALSE(m.EqualToAny('Q', "WXYZ"));
 }
 
 TEST(ApplyTest, IsVowel1){
     Metaphone m{"abcde"};
-    EXPECT_TRUE(m.isVowel('i'));
+    EXPECT_TRUE(m.isVowel('I'));
 }
 
 TEST(ApplyTest, IsVowel2){
     Metaphone m{"abcde"};
-    EXPECT_FALSE(m.isVowel('p'));
+    EXPECT_FALSE(m.isVowel('P'));
 }
