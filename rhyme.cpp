@@ -7,7 +7,7 @@ char Metaphone::peek() {
 
 char Metaphone::peek(int offset){
     int newpos = pos + offset;
-    if(newpos < 0 || newpos >= word.length())
+    if(newpos < 0 || newpos >= (int)word.length())
         return '\0';
     return word[newpos];
 }
@@ -63,7 +63,7 @@ std::string Metaphone::encode(){
         while(peek() != '\0'){
             char current = peek(); // for cache optimization
 
-            if(EqualToAny(current, "FJLMNR") || encoded.empty() && isVowel(current)){
+            if(EqualToAny(current, "FJLMNR") || (encoded.empty() && isVowel(current))){
                 encoded.push_back(current); // F,J,L,M,N,R and beining vowels always make their own sounds
                 moveAhead();
             }

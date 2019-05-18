@@ -27,5 +27,9 @@ if(BUILD_TESTS)
     add_executable(test_rhyme test_rhyme.cpp rhyme.cpp)
     target_link_libraries(test_rhyme gtest gtest_main)
 
+    add_executable(test_encode test_encode.cpp rhyme.cpp)
+    target_link_libraries(test_encode gtest gtest_main)
+
     add_test(TestRhyme test_rhyme)
+    add_test(TestEncode test_encode)
 endif()
