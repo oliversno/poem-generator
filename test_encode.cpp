@@ -8,7 +8,7 @@ TEST(ApplyTest, SilentBeginings1){
 
 TEST(ApplyTest, SilentBeginings2){
     Metaphone m{"aero"};
-    EXPECT_EQ(m.encode(), "er");
+    EXPECT_EQ(m.encode(), "ER");
 }
 
 TEST(ApplyTest, SilentBeginings3){
@@ -43,7 +43,7 @@ TEST(ApplyTest, CRules2){
 
 TEST(ApplyTest, CRules3){
     Metaphone m{"mischief"};
-    EXPECT_EQ(m.encode(), "MKF");
+    EXPECT_EQ(m.encode(), "MSKF");
 }
 
 TEST(ApplyTest, CRules4){
@@ -88,17 +88,17 @@ TEST(ApplyTest, DRules4){
 
 TEST(ApplyTest, GRules1){
     Metaphone m{"aught"};
-    EXPECT_EQ(m.encode(), "AFT");
+    EXPECT_EQ(m.encode(), "AT");
 }
 
 TEST(ApplyTest, GRules2){
     Metaphone m{"high"};
-    EXPECT_EQ(m.encode(), "HF");
+    EXPECT_EQ(m.encode(), "H");
 }
 
 TEST(ApplyTest, GRules3){
     Metaphone m{"yoghurt"};
-    EXPECT_EQ(m.encode(), "YFRT");
+    EXPECT_EQ(m.encode(), "YKRT");
 }
 
 TEST(ApplyTest, GRules4){
@@ -128,7 +128,7 @@ TEST(ApplyTest, GRules8){
 
 TEST(ApplyTest, GRules9){
     Metaphone m{"soggy"};
-    EXPECT_EQ(m.encode(), "SK");
+    EXPECT_EQ(m.encode(), "SJ");
 }
 
 TEST(ApplyTest, GRules10){
@@ -139,6 +139,11 @@ TEST(ApplyTest, GRules10){
 TEST(ApplyTest, GRules11){
     Metaphone m{"big"};
     EXPECT_EQ(m.encode(), "BK");
+}
+
+TEST(ApplyTest, GRules12){
+    Metaphone m{"ghost"};
+    EXPECT_EQ(m.encode(), "KST");
 }
 
 TEST(ApplyTest, HRules1){

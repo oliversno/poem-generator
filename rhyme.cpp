@@ -106,9 +106,9 @@ std::string Metaphone::encode(){
                        }
                        break;
                     case 'G':
-                        if ((peek(1) != 'H' || isVowel(peek(2))) &&
-                            (peek(1) != 'N' || (peek(1) != '\0' &&
-                            (peek(2) != 'E' || peek(3) != 'D'))) &&
+                        if ((peek(1) != 'H' || (isVowel(peek(2)) && peek(2) != '\0')) &&
+                            (peek(1) != 'N' || (peek(2) != '\0' &&
+                                (peek(2) != 'E' || peek(3) != 'D' || peek(4) != '\0'))) &&
                             (peek(-1) != 'D' || !EqualToAny(peek(1), "EIY"))){
                                 if (EqualToAny(peek(1), "EIY") && peek(2) != 'G'){
                                     encoded.push_back('J'); //GE,GI,GY makes 'J' sound
