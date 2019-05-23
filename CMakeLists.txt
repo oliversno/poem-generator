@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-add_executable(main rhyme.cpp main.cpp)
+add_executable(main dictionary.cpp main.cpp entry.cpp)
 
 if(BUILD_TESTS)
     include_directories(${GTEST_INCLUDE_DIRS})
