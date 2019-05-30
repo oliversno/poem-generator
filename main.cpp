@@ -1,7 +1,9 @@
 #include "dictionary.h"
+#include "poetic.h"
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 // std::vector<std::string> colorCodes{"31", "32", "33", "34", "35", "36", "91", "92", "93", "94", "95", "96"};
 // std::map<char, std::string> color_mapping;
@@ -52,5 +54,16 @@ int main(){
         return 1;
     }
     Dictionary dict{fs};
-    int test = 6;
+    std::string input;
+    std::vector<std::string> inputs{"forgotten", "spot", "in", "the", "caribbean"};
+    std::for_each(inputs.begin(), inputs.end(), [](std::string& s){std::transform(s.begin(), s.end(), s.begin(), ::toupper);});
+    // while(std::cin >> input){
+    //      if(input == "0")
+    //          break;
+    //      inputs.push_back(input);
+    //  }
+     std::vector<int> poem;
+     poem.reserve(inputs.size());
+     std::transform(inputs.begin(), inputs.end(), std::back_inserter(poem), [&dict](std::string& s){return dict.lookup(s);});
+     techniques(poem, dict);
 }

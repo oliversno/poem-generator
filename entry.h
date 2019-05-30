@@ -1,3 +1,6 @@
+#ifndef ENTRY_H
+#define ENTRY_H
+
 #include <vector>
 #include <string>
 #include <sstream>
@@ -16,10 +19,15 @@ public:
 //    DictEntry& operator=(DictEntry&&) = delete;
     // dtor
 //    ~DictEntry();
+int num_syllables() const;
+int num_pheonomes() const;
+const std::vector<std::vector<std::string>>& get_phenomes() const;
+const std::vector<Stress>& get_stress() const;
 private:
     std::string word;
     //std::unordered_set<DictEntry> rhymes_with;
-    int num_syllables;
     std::vector<Stress> stress;
-    std::vector<std::string> phenomes;
+    std::vector<std::vector<std::string>> phenomes;
 };
+
+#endif // ENTRY_H
