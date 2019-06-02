@@ -34,15 +34,30 @@ std::vector<std::string>::iterator vowel(std::vector<std::string>& syllable){
     return std::find_if(syllable.begin(), syllable.end(), vowel_phenome_pred);
 }
 
-int num_shared_constants(std::vector<std::string> syllable1, std::vector<std::string> syllable2){
-    syllable1.erase(vowel(syllable1));
-    syllable2.erase(vowel(syllable2));
-    std::sort(syllable1.begin(), syllable1.end());
-    std::sort(syllable2.begin(), syllable2.end());
-    std::vector<std::string> res;
-    res.reserve(syllable1.size()+syllable2.size());
-    std::set_intersection(syllable1.begin(), syllable1.end(), syllable2.begin(), syllable2.end(), std::back_inserter(res));
-    return res.size();
+int similar_constanant_score(const std::string& c1, const std::string& c2, const char pos){
+    if(c1 == c2)
+        return 1;
+    auto map_it = (pos == 'I') ? constanant_map_initial.find(std::make_pair(c1, c2)) : constanant_map_final.find(std::make_pair(c1, c2));
+    if(map_it == constanant_map_initial.end() || map_it == constanant_map_final.end())
+        return 0;
+    return map_it->second;
+}
+
+double similar_constanant_score(std::vector<std::string> syllable1, std::vector<std::string> syllable2){
+    auto it_vowel1 = vowel(syllable1);
+    auto it_vowel2 = vowel(syllable2);
+    double res = 0;
+    for(auto it1 = syllable1.begin(); it1 != it_vowel1; it1++){
+        for(auto it2 = syllable2.begin(); it2 != it_vowel2; it2++){
+            res += similar_constanant_score(*it1, *it2, 'I')/800;
+        }
+    }
+    for(auto it1 = ++it_vowel1; it1 != syllable1.end(); it1++){
+        for(auto it2 = ++it_vowel2; it2 != syllable2.end(); it2++){
+            res += similar_constanant_score(*it1, *it2, 'F')/800;
+        }
+    }
+    return res;
 }
 
 double cord_dist(const std::pair<int,int>& c1, const std::pair<int,int>& c2){
@@ -94,5 +109,5 @@ int techniques(std::vector<std::string>& syllable1, std::vector<std::string>& sy
         vowel_sim *= 0.5;
     if(stress2 == Stress::Unstressed)
         vowel_sim *= 0.5;
-    return vowel_sim + num_shared_constants(syllable1, syllable2);
+    return vowel_sim + similar_constanant_score(syllable1, syllable2);
 }
