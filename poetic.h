@@ -2,6 +2,7 @@
 #define POETIC_H
 
 #include "dictionary.h"
+#include <unordered_map>
 
 std::vector<std::vector<int>> techniques(std::vector<int> line, Dictionary& dictionary);
 
@@ -25,7 +26,7 @@ double vowel_dist(const std::string& vowel1, const std::string& vowel2);
 // We can analyze the similarity of vowel sounds by how close their formants are
 int techniques(std::vector<std::string>& syllable1, std::vector<std::string>& syllable2, const Stress stress1, const Stress stress2);
 
-
+// VOWELS
 // ARARPABET    F1  F2
 // AY   dipthong    850 1610 and IH
 // AW   dipthong    850 1610 and UH
@@ -42,5 +43,117 @@ int techniques(std::vector<std::string>& syllable1, std::vector<std::string>& sy
 // IH   400 2250
 // UH   475 1250
 // AH   600 1170
+
+//CONST
+// ARAPABET
+// B    0
+// CH   12
+// D    1
+// DH   9
+// F    16
+// G    2
+// HH
+// JH   11
+// K    19
+// L    4
+// M    7
+// N    6
+// NG   5
+// P    17
+// R    3
+// S    14
+// SH   13
+// T    18
+// TH   15
+// V    8
+// W
+// Y
+// Z    10
+// ZH
+
+static std::unordered_map<std::pair<std::string, std::string>, int> create_constanant_map_final(){
+    std::unordered_map<std::pair<std::string, std::string>, int> m;
+    m[std::make_pair("B","D")] = 103;
+    m[std::make_pair("B","G")] = 122;
+    m[std::make_pair("B","L")] = 51;
+    m[std::make_pair("B","V")] = 64;
+    m[std::make_pair("B","P")] = 112;
+    m[std::make_pair("D","B")] = 94;
+    m[std::make_pair("D","G")] = 91;
+    m[std::make_pair("D","R")] = 47;
+    m[std::make_pair("D","JH")] = 68;
+    m[std::make_pair("D","T")] = 40;
+    m[std::make_pair("G","B")] = 91;
+    m[std::make_pair("G","D")] = 135;
+    m[std::make_pair("G","R")] = 112;
+    m[std::make_pair("G","L")] = 84;
+    m[std::make_pair("G","Z")] = 62;
+    m[std::make_pair("G","JH")] = 66;
+    m[std::make_pair("G","S")] = 57;
+    m[std::make_pair("G","K")] = 59;
+    m[std::make_pair("R","L")] = 123;
+    m[std::make_pair("L","R")] = 128;
+    m[std::make_pair("L","NG")] = 42;
+    m[std::make_pair("NG","N")] = 90;
+    m[std::make_pair("NG","N")] = 78;
+    m[std::make_pair("N","R")] = 44;
+    m[std::make_pair("N","L")] = 48;
+    m[std::make_pair("N","NG")] = 390;
+    m[std::make_pair("N","M")] = 182;
+    m[std::make_pair("M","L")] = 42;
+    m[std::make_pair("M","NG")] = 281;
+    m[std::make_pair("M","N")] = 159;
+    m[std::make_pair("V","B")] = 184;
+    m[std::make_pair("V","D")] = 97;
+    m[std::make_pair("V","G")] = 128;
+    m[std::make_pair("V","R")] = 74;
+    m[std::make_pair("V","L")] = 141;
+    m[std::make_pair("V","NG")] = 69;
+    m[std::make_pair("V","N")] = 54;
+    m[std::make_pair("V","DH")] = 714;
+    m[std::make_pair("V","Z")] = 70;
+    m[std::make_pair("V","S")] = 42;
+    m[std::make_pair("V","F")] = 67;
+    m[std::make_pair("DH","B")] = 56;
+    m[std::make_pair("DH","D")] = 87;
+    m[std::make_pair("DH","G")] = 54;
+    m[std::make_pair("DH","V")] = 131;
+    m[std::make_pair("Z","S")] = 177;
+    m[std::make_pair("JH","R")] = 65;
+    m[std::make_pair("JH","Z")] = 144;
+    m[std::make_pair("JH","CH")] = 285;
+    m[std::make_pair("JH","SH")] = 221;
+    m[std::make_pair("JH","S")] = 82;
+    m[std::make_pair("CH","Z")] = 40;
+    m[std::make_pair("CH","JH")] = 75;
+    m[std::make_pair("CH","SH")] = 214;
+    m[std::make_pair("CH","S")] = 59;
+    m[std::make_pair("SH","CH")] = 146;
+    m[std::make_pair("SH","S")] = 106;
+    m[std::make_pair("S","Z")] = 61;
+    m[std::make_pair("S","SH")] = 40;
+    m[std::make_pair("TH","S")] = 76;
+    m[std::make_pair("TH","F")] = 394;
+    m[std::make_pair("TH","T")] = 46;
+    m[std::make_pair("TH","K")] = 60;
+    m[std::make_pair("F","S")] = 44;
+    m[std::make_pair("F","TH")] = 337;
+    m[std::make_pair("F","P")] = 49;
+    m[std::make_pair("F","K")] = 48;
+    m[std::make_pair("P","B")] = 60;
+    m[std::make_pair("P","T")] = 99;
+    m[std::make_pair("P","K")] = 149;
+    m[std::make_pair("T","Z")] = 72;
+    m[std::make_pair("T","CH")] = 65;
+    m[std::make_pair("T","S")] = 111;
+    m[std::make_pair("T","P")] = 114;
+    m[std::make_pair("T","K")] = 90;
+    m[std::make_pair("K","G")] = 57;
+    m[std::make_pair("K","SH")] = 43;
+    m[std::make_pair("K","S")] = 46;
+    m[std::make_pair("K","P")] = 217;
+    m[std::make_pair("K","T")] = 132;
+}
+static const std::unordered_map<std::pair<std::string, std::string>, int> constanant_map_final = create_constanant_map_final();
 
 #endif //POETIC_H

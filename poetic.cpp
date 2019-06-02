@@ -85,7 +85,7 @@ double vowel_dist(const std::string& vowel1, const std::string& vowel2){
 }
 
 int techniques(std::vector<std::string>& syllable1, std::vector<std::string>& syllable2, const Stress stress1, const Stress stress2){
-    int vowel_sim = 1800 - vowel_dist(*vowel(syllable1), *vowel(syllable2))/600;
+    double vowel_sim = 1800 - vowel_dist(*vowel(syllable1), *vowel(syllable2));
     if(stress1 == Stress::PrimaryStress)
         vowel_sim *= 2;
     if(stress2 == Stress::PrimaryStress)
