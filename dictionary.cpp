@@ -1,4 +1,5 @@
 #include "dictionary.h"
+#include <iostream>
 
 Dictionary::Dictionary(std::fstream& fs){
     std::string input;
@@ -16,14 +17,19 @@ Dictionary::Dictionary(std::fstream& fs){
     }
 }
 
-class notInDictionaryException{};
+class notInDictionaryException{
+    public:
+    notInDictionaryException(const std::string& str){
+        std::cout << str << '\n';
+    }
+};
 
 int Dictionary::lookup(std::string& query){
     std::unordered_map<std::string,int>::const_iterator it = index.find(query);
     if(it != index.end()){
         return it->second;
-    }
-    throw notInDictionaryException();
+    };
+    throw notInDictionaryException(query);
 }
 
 DictEntry& Dictionary::at(int num){

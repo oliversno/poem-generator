@@ -47,23 +47,36 @@
 
 const std::string kFILENAME = "/mnt/c/Users/Sean/Documents/Personal Projects/poem generator/cmudict.rep";
 
-int main(){
-    std::fstream fs{kFILENAME};
+int main(int argc, char** argv){
+    if(argc != 4)
+        return 1;
+    std::fstream fs{argv[2]};
     if(!fs.is_open()){
         std::cout << "File Open Failed\n";
         return 1;
     }
     Dictionary dict{fs};
+    fs.close();
     std::string input;
-    std::vector<std::string> inputs{"forgotten", "spot", "in", "the", "caribbean"};
-    std::for_each(inputs.begin(), inputs.end(), [](std::string& s){std::transform(s.begin(), s.end(), s.begin(), ::toupper);});
-    // while(std::cin >> input){
-    //      if(input == "0")
-    //          break;
-    //      inputs.push_back(input);
-    //  }
+    std::vector<std::string> inputs;
+    fs.open(argv[3]);
+    if(!fs.is_open()){
+        std::cout << "File Open Failed\n";
+        return 1;
+    }
+    while(fs >> input){
+         inputs.push_back(input);
+     }
+     std::for_each(inputs.begin(), inputs.end(), [](std::string& s){std::transform(s.begin(), s.end(), s.begin(), ::toupper);});
      std::vector<int> poem;
      poem.reserve(inputs.size());
      std::transform(inputs.begin(), inputs.end(), std::back_inserter(poem), [&dict](std::string& s){return dict.lookup(s);});
-     techniques(poem, dict);
+     std::vector<std::vector<int>> rhyme_matrix = techniques(poem, dict);
+     for(std::vector<int> vec : rhyme_matrix){
+         for(int i : vec){
+             std::cout << i << ' ';
+         }
+         std::cout << '\n';
+     }
+     return 0;
 }

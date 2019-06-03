@@ -53,8 +53,8 @@ double similar_constanant_score(std::vector<std::string> syllable1, std::vector<
             res += (similar_constanant_score(*it1, *it2, 'I')/800);
         }
     }
-    for(auto it1 = ++it_vowel1; it1 != syllable1.end(); it1++){
-        for(auto it2 = ++it_vowel2; it2 != syllable2.end(); it2++){
+    for(auto it1 = ++it_vowel1; it1 < syllable1.end(); it1++){
+        for(auto it2 = ++it_vowel2; it2 < syllable2.end(); it2++){
             res += (similar_constanant_score(*it1, *it2, 'F')/800);
         }
     }
