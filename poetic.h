@@ -71,8 +71,17 @@ int techniques(std::vector<std::string>& syllable1, std::vector<std::string>& sy
 // Z    10
 // ZH
 
-static std::unordered_map<std::pair<std::string, std::string>, int> create_constanant_map_initial(){
-    std::unordered_map<std::pair<std::string, std::string>, int> m;
+struct pair_hasher
+{
+	template <class T1, class T2>
+	std::size_t operator() (const std::pair<T1, T2> &pair) const
+	{
+		return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
+	}
+};
+
+static std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> create_constanant_map_initial(){
+    std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> m;
     m[std::make_pair("B","V")] = 57;
     m[std::make_pair("D","G")] = 76;
     m[std::make_pair("D","Z")] = 51;
@@ -159,10 +168,10 @@ static std::unordered_map<std::pair<std::string, std::string>, int> create_const
     m[std::make_pair("HH","T")] = 175;
     m[std::make_pair("HH","K")] = 177;
 }
-static const std::unordered_map<std::pair<std::string, std::string>, int> constanant_map_initial = create_constanant_map_initial();
+static const std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> constanant_map_initial = create_constanant_map_initial();
 
-static std::unordered_map<std::pair<std::string, std::string>, int> create_constanant_map_final(){
-    std::unordered_map<std::pair<std::string, std::string>, int> m;
+static std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> create_constanant_map_final(){
+    std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> m;
     m[std::make_pair("B","D")] = 103;
     m[std::make_pair("B","G")] = 122;
     m[std::make_pair("B","L")] = 51;
@@ -243,7 +252,8 @@ static std::unordered_map<std::pair<std::string, std::string>, int> create_const
     m[std::make_pair("K","S")] = 46;
     m[std::make_pair("K","P")] = 217;
     m[std::make_pair("K","T")] = 132;
+    return m;
 }
-static const std::unordered_map<std::pair<std::string, std::string>, int> constanant_map_final = create_constanant_map_final();
+static const std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> constanant_map_final = create_constanant_map_final();
 
 #endif //POETIC_H
