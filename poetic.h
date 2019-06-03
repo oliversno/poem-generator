@@ -167,6 +167,7 @@ static std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher>
     m[std::make_pair("HH","P")] = 328;
     m[std::make_pair("HH","T")] = 175;
     m[std::make_pair("HH","K")] = 177;
+    return m;
 }
 static const std::unordered_map<std::pair<std::string, std::string>, int, pair_hasher> constanant_map_initial = create_constanant_map_initial();
 

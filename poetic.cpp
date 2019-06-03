@@ -34,10 +34,11 @@ std::vector<std::string>::iterator vowel(std::vector<std::string>& syllable){
     return std::find_if(syllable.begin(), syllable.end(), vowel_phenome_pred);
 }
 
-int similar_constanant_score(const std::string& c1, const std::string& c2, const char pos){
+double similar_constanant_score(const std::string& c1, const std::string& c2, const char pos){
     if(c1 == c2)
         return 1;
-    auto map_it = (pos == 'I') ? constanant_map_initial.find(std::make_pair(c1, c2)) : constanant_map_final.find(std::make_pair(c1, c2));
+    auto map = (pos == 'I') ? constanant_map_initial : constanant_map_final;
+    auto map_it = map.find(std::pair<std::string,std::string>{c1,c2});
     if(map_it == constanant_map_initial.end() || map_it == constanant_map_final.end())
         return 0;
     return map_it->second;
@@ -49,12 +50,12 @@ double similar_constanant_score(std::vector<std::string> syllable1, std::vector<
     double res = 0;
     for(auto it1 = syllable1.begin(); it1 != it_vowel1; it1++){
         for(auto it2 = syllable2.begin(); it2 != it_vowel2; it2++){
-            res += similar_constanant_score(*it1, *it2, 'I')/800;
+            res += (similar_constanant_score(*it1, *it2, 'I')/800);
         }
     }
     for(auto it1 = ++it_vowel1; it1 != syllable1.end(); it1++){
         for(auto it2 = ++it_vowel2; it2 != syllable2.end(); it2++){
-            res += similar_constanant_score(*it1, *it2, 'F')/800;
+            res += (similar_constanant_score(*it1, *it2, 'F')/800);
         }
     }
     return res;
