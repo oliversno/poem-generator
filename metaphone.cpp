@@ -1,5 +1,4 @@
-#include "rhyme.h"
-#include <string>
+#include "metaphone.h"
 
 char Metaphone::peek() {
     return peek(0);

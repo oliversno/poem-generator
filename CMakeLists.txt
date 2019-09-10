@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-add_executable(main rhyme.cpp main.cpp)
+add_executable(main dictionary.cpp main.cpp entry.cpp poetic.cpp)
 
 if(BUILD_TESTS)
     include_directories(${GTEST_INCLUDE_DIRS})
@@ -26,12 +26,12 @@ if(BUILD_TESTS)
     
     enable_testing()
 
-    add_executable(test_rhyme test_rhyme.cpp rhyme.cpp)
+    add_executable(test_metaphone test_metaphone.cpp metaphone.cpp)
     target_link_libraries(test_rhyme gtest gtest_main)
 
-    add_executable(test_encode test_encode.cpp rhyme.cpp)
+    add_executable(test_encode test_encode.cpp metaphone.cpp)
     target_link_libraries(test_encode gtest gtest_main)
 
-    add_test(TestRhyme test_rhyme)
+    add_test(TestMetaphone test_metaphone)
     add_test(TestEncode test_encode)
 endif()

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "rhyme.h"
+#include "metaphone.h"
 
 TEST(ApplyTest, Basic1){
     Metaphone m{"abcde"};
